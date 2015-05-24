@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Contact Example</title>
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+    // Wait for device API libraries to load
+    //
+    window.onload=function(){
+    document.addEventListener("deviceready", onDeviceReady, false);
+    }
+    // device APIs are available
+    //
+    function onDeviceReady() {
+       document.getElementById('btnSave').addEventListener('click',salvar,false);
+    }
+   
+    function onSuccess(contacts) {
+         alert("Contato Salvo");
+
+    };
+
+    function onError(contactError) {
+         alert("Falha ao Salvar");
+    };
+
+
+    function salvar(){
+        var myContact = navigator.contacts.create();
+         myContact.displayName = document.getElementById('nome').value;
+         myContact.save(onSuccess(myContact), onError);  
+         myContact.save();
+    }
+
+    </script>
+  </head>
+  <body>
+    <h1>Example</h1>
+    <p>Salvar Contato</p>
+    <form>
+    <label>Nome</label>
+    <input  type="text" id="nome"></input>
+
+    <input type="button" id="btnSave" value="Salvar Contato"></input>
+    </form>
+  </body>
+</html>
